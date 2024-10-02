@@ -99,7 +99,7 @@ Details for accessing the admin panel can be added here.
 
 ## Screenshots
 
-[You can add screenshots of your application here]
+![Alt Text](./src/assets/email-ss.png)
 
 ## Contributing
 
