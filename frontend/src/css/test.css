@@ -1,0 +1,7 @@
+/* Mobile Portrait (375px and below) */
+@media (max-width: 400px) {
+  /* Font sizes */
+  .custom {
+    width: 27rem;
+  }
+}
