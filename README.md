@@ -99,7 +99,7 @@ Details for accessing the admin panel can be added here.
 
 ## Screenshots
 
-![Alt Text](./src/assets/email-ss.png)
+![Email Notification](./frontend/src/assets/email-ss.png)
 
 ## Contributing
 
