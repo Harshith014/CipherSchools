@@ -1,92 +1,114 @@
 # MCQ Test Platform
 
-A web-based platform allowing students to take multiple-choice question (MCQ) tests with user authentication, test administration, and result evaluation, built using the MERN stack (MongoDB, Express, React, Node.js).
+A web-based platform for administering Multiple Choice Question (MCQ) tests with automated evaluation and result notification.
 
-Table of Contents
-Features
-Tech Stack
-Installation
-Usage
-Admin Panel
-Email Service
-Testing
-License
-Features
-User Authentication: Secure login and registration using JWT, with passwords hashed by bcryptjs.
-Proctoring: After login, the platform requests camera and microphone permissions for proctoring during the test.
-MCQ Test Interface: A user-friendly interface built with shadcn UI. The test includes a timer, a camera preview interface, and options to navigate freely between 10 MCQs. Users can save answers as they select options.
-Admin Panel: Role-based authorization allows administrators to create test questions and manage test rooms.
-Email Notifications: Using node-cron and Nodemailer, the system evaluates tests and sends users their scores via email.
-State Management: Context API is used for managing user state throughout the application.
-Role-Based Authorization: Secure role-based access to specific features and functionalities (e.g., admin panel).
-Cron Jobs: node-cron is used to schedule evaluation tasks every hour and send test results via email using Nodemailer with Pug templates.
-Tech Stack
-Frontend: React.js, shadcnUI, Vite, Tailwind CSS, Context API
-Backend: Node.js, Express.js, MongoDB
-Authentication: JWT, bcryptjs for password hashing
-Email Service: Nodemailer with Pug templates
-Cron Jobs: node-cron
-Database: MongoDB (Mongoose for data modeling)
-Installation
-Clone the repository:
+## Features
 
-bash
-Copy code
-git clone https://github.com/yourusername/mcq-platform.git
-cd mcq-platform
-Set up environment variables: Create a .env file in the backend and add the necessary environment variables such as MongoDB URI, JWT secret, email credentials for Nodemailer, etc.
+- User authentication with JWT
+- Secure password hashing using bcryptjs
+- State management with Context API
+- Camera and microphone permissions for test proctoring
+- Interactive MCQ test interface with timer and navigation
+- Real-time camera preview during the test
+- Automated test evaluation and email notification
+- Role-based authorization
+- Admin panel for question and test room management
 
-Install dependencies:
+## Tech Stack
 
-For the frontend:
-bash
-Copy code
-cd frontend
-npm install
-For the backend:
-bash
-Copy code
-cd backend
-npm install
-Run the project:
+### Frontend
+- React.js with Vite
+- shadcn UI components
+- Tailwind CSS for styling
 
-Frontend:
-bash
-Copy code
-cd frontend
-npm run dev
-Backend:
-bash
-Copy code
-cd backend
-npm run dev
-Usage
-User Registration and Login: Upon registration, users can log in and access the MCQ tests. The login status is maintained via JWT stored in context API, which conditionally renders the login, register, and logout buttons.
+### Backend
+- Node.js with Express
+- MongoDB for database
+- Mongoose for ODM
+- JWT for authentication
+- bcryptjs for password hashing
+- node-cron for scheduling tasks
+- Nodemailer for sending emails
+- Pug for email templates
 
-Taking the Test: After successful authentication, users can grant permission for their camera and microphone to start the test. The MCQ interface includes a camera preview and a timer. Users can freely navigate between the 10 MCQs and save their answers.
+## Getting Started
 
-Submitting the Test: After submitting the test, users are redirected to a completion page with a message indicating the test is completed. Test results are evaluated using a cron job that runs every hour, and results are sent via email.
+### Prerequisites
+- Node.js
+- MongoDB
 
-Admin Panel
-Administrators can access the admin panel to create new MCQ tests and manage test rooms. Role-based access control ensures only users with admin privileges can perform these actions.
+### Installation
 
-Email Service
-Results are automatically evaluated and sent to users via email using Nodemailer.
-Emails are sent based on the cron job that runs every hour, triggered 5 minutes after test completion.
-The email template is rendered using Pug, ensuring a clean and professional format.
-Testing
-To test the platform, use the following credentials:
+1. Clone the repository
+   ```
+   git clone [your-repo-link]
+   cd [your-repo-name]
+   ```
 
-Test User:
+2. Set up the frontend
+   ```
+   cd frontend
+   npm install
+   ```
 
-Email: test@gmail.com
-Password: 123456
-To Create Your Own Account:
+3. Set up the backend
+   ```
+   cd backend
+   npm install
+   ```
 
-Username: Your choice
-Email: Use a valid email (for receiving results)
-Password: Create a password of your choice
-Note: If the email you use is invalid or fake, you won’t receive any email regarding test results.
+4. Create a `.env` file in the backend directory and add your configuration:
+   ```
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   EMAIL_USER=your_email@example.com
+   EMAIL_PASS=your_email_password
+   ```
 
-License
-This project is licensed under the MIT License.
+### Running the Application
+
+1. Start the frontend
+   ```
+   cd frontend
+   npm run dev
+   ```
+
+2. Start the backend
+   ```
+   cd backend
+   npm run dev
+   ```
+
+## Usage
+
+### Test Account
+For testing purposes, you can use the following credentials:
+- Email: test@gmail.com
+- Password: 123456
+
+**Note:** To receive test results via email, please use a valid email address when registering.
+
+### Admin Access
+Details for accessing the admin panel can be added here.
+
+## Additional Information
+
+- The application uses cron jobs to evaluate test submissions every hour and send results via email.
+- Email notifications use a Pug template for formatting.
+- The platform supports role-based access control for users and administrators.
+
+## Screenshots
+
+[You can add screenshots of your application here]
+
+## Contributing
+
+Instructions for how to contribute to your project can be added here.
+
+## License
+
+Specify your project's license here.
+
+---
+
+For more information or support, please contact [Your Name/Team Name].
