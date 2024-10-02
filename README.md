@@ -101,14 +101,8 @@ Details for accessing the admin panel can be added here.
 
 ![Email Notification](./frontend/src/assets/email-ss.png)
 
-## Contributing
 
-Instructions for how to contribute to your project can be added here.
-
-## License
-
-Specify your project's license here.
 
 ---
 
-For more information or support, please contact [Your Name/Team Name].
+

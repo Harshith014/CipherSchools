@@ -13,7 +13,7 @@ export default function ResponsiveTestDashboard() {
   const [test, setTest] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+  const [timeLeft, setTimeLeft] = useState(1800); // 30 minutes in seconds
   const [reviewedQuestions, setReviewedQuestions] = useState({});
   const navigate = useNavigate();
   const { token, role } = useContext(AuthContext);
