@@ -6,39 +6,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../context/authContext";
 import "../css/test.css";
 
 const FinishPage = () => {
-  const { token } = useContext(AuthContext);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      startCronJob();
-    }, 300000); // 5 minutes
-
-    return () => clearTimeout(timer);
-  });
-
-  const startCronJob = async () => {
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_APP_BASE_URL}/start-cron`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (error) {
+  axios.post(`${import.meta.env.VITE_APP_BASE_URL}/start-cron`, null)
+    .catch((error) => {
       console.error(
         "Error stopping the cron job:",
         error.response.data.message
       );
-    }
-  };
+    });
 
   return (
     <div className="custom flex justify-center items-center min-h-screen bg-background">

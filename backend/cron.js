@@ -61,7 +61,7 @@ const evaluateTestsAndSendEmails = async () => {
       submission.scoreEmailed = true;
       await submission.save();
 
-      // console.log(`Email sent to ${user.email} with score ${submission.score}`);
+      console.log(`Email sent to ${user.email} with score ${submission.score}`);
     }
 
   } catch (error) {
