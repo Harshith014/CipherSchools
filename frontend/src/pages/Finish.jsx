@@ -6,17 +6,24 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
+import { useEffect } from "react";
 import "../css/test.css";
 
 const FinishPage = () => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      axios
+        .post(`${import.meta.env.VITE_APP_BASE_URL}/start-cron`, null)
+        .catch((error) => {
+          console.error(
+            "Error stopping the cron job:",
+            error.response.data.message
+          );
+        });
+    }, 300000); // 5 minutes in milliseconds
 
-  axios.post(`${import.meta.env.VITE_APP_BASE_URL}/start-cron`, null)
-    .catch((error) => {
-      console.error(
-        "Error stopping the cron job:",
-        error.response.data.message
-      );
-    });
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="custom flex justify-center items-center min-h-screen bg-background">

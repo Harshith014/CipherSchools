@@ -37,7 +37,7 @@ let cronJob;
 app.post('/api/start-cron', (req, res) => {
     if (!cronJob) {
       // Schedule the job to run every hour
-      cronJob = cron.schedule('*/2 * * * *', async () => {
+      cronJob = cron.schedule('0 * * * *', async () => {
         await evaluateTestsAndSendEmails();
       });
       cronJob.start();
