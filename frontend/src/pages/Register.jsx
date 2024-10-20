@@ -11,8 +11,8 @@ import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingComponent from '../components/Loading';
 import "../css/test.css";
-import LoadingComponent from "./Loading";
 
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);

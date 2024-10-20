@@ -6,8 +6,8 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LoadingComponent from '../components/Loading'; // Import the LoadingComponent
 import { AuthContext } from '../context/authContext';
-import LoadingComponent from './Loading'; // Import the LoadingComponent
 
 const Login = () => {
   const { login } = useContext(AuthContext);
