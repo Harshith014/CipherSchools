@@ -12,8 +12,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/test.css";
+import LoadingComponent from "./Loading";
 
 export default function RegisterForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -31,11 +33,13 @@ export default function RegisterForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
-      await axios.post(
+      const response = await axios.post(
         `${import.meta.env.VITE_APP_BASE_URL}/auth/register`,
         formData
       );
+      console.log(response.data);
       alert("Registration successful! You have successfully registered.");
       setFormData({
         username: "",
@@ -48,6 +52,13 @@ export default function RegisterForm() {
         "Registration failed. " +
           (error.response?.data?.message || "An unknown error occurred")
       );
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+      });
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -61,26 +72,30 @@ export default function RegisterForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {["username", "email", "password"].map((field) => (
-              <div key={field} className="space-y-2">
-                <Label htmlFor={field}>
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
-                </Label>
-                <Input
-                  id={field}
-                  name={field}
-                  type={field === "password" ? "password" : "text"}
-                  value={formData[field]}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            ))}
-            <Button type="submit" className="w-full">
-              Register
-            </Button>
-          </form>
+          {isLoading ? (
+            <LoadingComponent />
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {["username", "email", "password"].map((field) => (
+                <div key={field} className="space-y-2">
+                  <Label htmlFor={field}>
+                    {field.charAt(0).toUpperCase() + field.slice(1)}
+                  </Label>
+                  <Input
+                    id={field}
+                    name={field}
+                    type={field === "password" ? "password" : "text"}
+                    value={formData[field]}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              ))}
+              <Button type="submit" className="w-full">
+                Register
+              </Button>
+            </form>
+          )}
           <p className="text-sm text-gray-500 mt-4">
             Already have an account?{" "}
             <span

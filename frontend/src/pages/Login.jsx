@@ -7,15 +7,19 @@ import { jwtDecode } from 'jwt-decode';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
+import LoadingComponent from './Loading'; // Import the LoadingComponent
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true); // Start loading
+
     try {
       const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/auth/login`, {
         email,
@@ -36,7 +40,12 @@ const Login = () => {
         navigate("/test");
       }
     } catch (error) {
-      alert("Invalid email or password.", error);
+      alert("Invalid email or password.");
+      console.error(error);
+      setEmail("");
+      setPassword("");
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -48,31 +57,35 @@ const Login = () => {
           <CardDescription>Enter your email and password to login.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-          </form>
+          {isLoading ? ( // Conditionally render LoadingComponent
+            <LoadingComponent /> // Show loading indicator while fetching data
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
+            </form>
+          )}
           <p className="text-sm text-gray-500 mt-4">
             No account? <span className="text-blue-500 cursor-pointer" onClick={() => navigate("/register")}>Register</span>
           </p>
